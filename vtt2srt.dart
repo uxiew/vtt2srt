@@ -8,29 +8,20 @@ import 'package:args/args.dart';
 
 /**
    // 让用户命令行输入路径|可能出错~
-   // 递归查找当前目录及其子目录下文件
-   // 读取一系列文件内容
-   // 改写文档流内容
-   // 保存更改文件后缀名，在原本目录下
    // 命令行：目录输入使用双引号！！！！
 
 **/
 ArgResults argResults;
 
 void main(List<String> arguments){
-  // 暂停等待输入
-  
- exitCode = 0;
- 
-   final ArgParser argParser = new ArgParser()
-   ..addOption('dir', abbr: 'D', defaultsTo: '.');
+   
+       final ArgParser argParser = new ArgParser()
+       ..addOption('dir', abbr: 'D', defaultsTo: '.');
 
-  argResults = argParser.parse(arguments);
-  final String dir = argResults['dir'];
+      argResults = argParser.parse(arguments);
+      final String dir = argResults['dir'];
 
-  print("$dir ");
-
- // String demoPath = r'C:\Users\ChandlerVer5\Desktop\07 Trillo Project   Master Flexbox!\';
+  //String dir = r'C:\Users\ChandlerVer5\Desktop\07 Trillo Project   Master Flexbox!\004 SSR Overview-subtitle-en.vtt';
  
    walktree(dir, vttToSrt);
 }
@@ -93,11 +84,15 @@ vttToSrt(String filePath) {
   
 }
 
+
 /// 转换规则 [rules]
 
 String toSrtRule(filePath, data){
         int id = 0;
-       var ss = data.replaceAllMapped(
+        var ss = data.replaceAllMapped(
+                    new RegExp(r'(\d+):(\d+)\.(\d+)\s*--?>\s*(\d+):(\d+)\.(\d+)'), (Match m) => '${'00:'+m[1]+':'+m[2]+','+m[3]+' --> ' + '00:'+m[4]+':'+m[5]+','+m[6]}'
+                )
+                .replaceAllMapped(
                     new RegExp(r'(\d+):(\d+):(\d+)(?:.(\d+))?\s*--?>\s*(\d+):(\d+):(\d+)(?:.(\d+))?', caseSensitive: false),
                 (Match m) => m[1]+":"+m[2]+":"+m[3]+","+m[4]+" --> "
                             +m[5]+":"+m[6]+":"+m[7]+","+m[8]
