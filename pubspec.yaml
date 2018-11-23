@@ -1,0 +1,5 @@
+name: vtt2srt
+descript: 应用介绍
+
+dependencies:
+    args: ^1.5.1
