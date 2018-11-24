@@ -21,7 +21,7 @@ void main(List<String> arguments){
       argResults = argParser.parse(arguments);
       final String dir = argResults['dir'];
 
-  //String dir = r'C:\Users\ChandlerVer5\Desktop\07 Trillo Project   Master Flexbox!\004 SSR Overview-subtitle-en.vtt';
+  //String dir = r'C:\Users\ChandlerVer5\Desktop\Projectox!\xxx.vtt';
  
    walktree(dir, vttToSrt);
 }
@@ -33,8 +33,6 @@ void main(List<String> arguments){
    toSrtRule(filePath, data);
 }
 
-
-//递归检查文件夹
 Future walktree(String mainPath, callback) async{
     // 是否为vtt文件？
     try{
