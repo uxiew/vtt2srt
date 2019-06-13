@@ -9,7 +9,6 @@ import 'package:args/args.dart';
 /**
    // 让用户命令行输入路径|可能出错~
    // 命令行：目录输入使用双引号！！！！
-
 **/
 ArgResults argResults;
 
@@ -71,15 +70,13 @@ save(filePath, strContent){
         var file = new File(filePath.replaceAll(".vtt",".srt"));
         file.writeAsString(strContent)
         .then((File file) {
-           print('文件另存为： $file');
+           print('file saved as ： $file');
         });
 }
 
 
 vttToSrt(String filePath) {
-
    readVttFile(filePath);
-  
 }
 
 

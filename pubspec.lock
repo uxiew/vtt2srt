@@ -5,8 +5,8 @@ packages:
     dependency: "direct main"
     description:
       name: args
-      url: "https://pub.flutter-io.cn"
+      url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.1"
+    version: "1.5.2"
 sdks:
-  dart: ">=1.22.0 <3.0.0"
+  dart: ">=2.0.0 <3.0.0"
