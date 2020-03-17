@@ -1,12 +1,38 @@
 # vtt to srt
 
-×ñÑ­ÁËsrt±ê×¼×ª»»£¬Maybe ²»»á³ö´í~
+Convert WebVTT (The Web Video Text Tracks Format, aka html5 video subtitles) into (SubRip file).srt file.ï¼Œvice versa.ã€WIPã€‘
 
-Ö»ÊÇÎªÁËºÃÍæ~
+éµå¾ªäº†(SubRip file).srtæ ‡å‡†è½¬æ¢
+åªæ˜¯ä¸ºäº†å¥½ç©~
 
-Ê¹ÓÃ£º
+# Usage
 ```
 dart vtt2srt.dart -D "path"
 ```
-`path` Ê¹ÓÃË«ÒıºÅ£¬È»ºó×ª»»¸ÃÄ¿Â¼¼°Æä×ÓÎÄ¼ş¼ĞÏÂËùÓĞ`vtt`ÎÄ¼ş¡£
 
+The srt files is generated in the original directory.
+`path` ä½¿ç”¨åŒå¼•å·ï¼Œç„¶åè½¬æ¢è¯¥ç›®å½•åŠå…¶å­æ–‡ä»¶å¤¹ä¸‹æ‰€æœ‰`vtt`æ–‡ä»¶ã€‚é»˜è®¤è½¬æ¢å½“å‰ç›®å½•ä¸‹æ–‡ä»¶
+
+
+
+
+
+# Update æ›´æ–°
+
+æ”¯æŒ [FrontendMasters/fm-transcripts](https://github.com/FrontendMasters/fm-transcripts/) ä¸‹ `.web_vtt` æ–‡ä»¶çš„å†…å®¹ç¼–ç é”™è¯¯ä¿®å¤ï¼Œå¦‚ï¼š
+```
+&gt;&gt; // ==>  >>
+```
+çš„é‡å‘½ååŠè½¬åŒ–ï¼
+
+
+
+
+# TODO
+ASS
+
+
+# Refs
+[smplayer's convert](https://chromecast.smplayer.info/convert-srt-to-vtt/)
+https://github.com/asticode/go-astisub
+https://github.com/jamiees2/ass-to-vtt

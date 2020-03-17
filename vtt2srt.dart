@@ -13,6 +13,9 @@ import 'package:args/args.dart';
 **/
 ArgResults argResults;
 
+
+var matchedReg = new RegExp(r'\.(web_vtt|vtt)$');
+
 void main(List<String> arguments){
    
        final ArgParser argParser = new ArgParser()
@@ -22,14 +25,19 @@ void main(List<String> arguments){
       final String dir = argResults['dir'];
 
   //String dir = r'C:\Users\ChandlerVer5\Desktop\Projectox!\xxx.vtt';
- 
-   walktree(dir, vttToSrt);
+   walktree (dir, vttToSrt);
 }
 
 
 // 读取文件内容
  readVttFile(filePath) {
-   var data =  new File(filePath).readAsStringSync();
+   var data =  new File(filePath).readAsStringSync()
+	// 修改文件内容中的一些错误编码字符等~
+	.replaceAll("&gt;&gt;",">>");
+
+	// print(data);
+   
+   // 跳转到实际规则操作函数
    toSrtRule(filePath, data);
 }
 
@@ -42,7 +50,7 @@ Future walktree(String mainPath, callback) async{
                 //'walktree'();
                 new Directory(mainPath).list(recursive: true, followLinks: false)
                 .listen((FileSystemEntity entity) {
-                   if (entity.path.contains(new RegExp(r'.vtt$'))) {
+                   if (entity.path.contains(matchedReg)) {
                     FileSystemEntity.isFile(entity.path).then((res){
                         if(res){
                           callback(entity.path);
@@ -67,8 +75,7 @@ Future walktree(String mainPath, callback) async{
 
 // 保存文件
 save(filePath, strContent){
-
-        var file = new File(filePath.replaceAll(".vtt",".srt"));
+        var file = new File(filePath.replaceAll(matchedReg,".srt"));
         file.writeAsString(strContent)
         .then((File file) {
            print('文件另存为： $file');
@@ -95,11 +102,13 @@ String toSrtRule(filePath, data){
                 (Match m) => m[1]+":"+m[2]+":"+m[3]+","+m[4]+" --> "
                             +m[5]+":"+m[6]+":"+m[7]+","+m[8]
                             )
-                 //srt标准时间前一行需要id数字，所以根据判断，vtt文件没有的话就加上~
+                 //srt 标准时间前一行需要id数字，所以根据判断，vtt文件没有的话就加上~
                 .replaceAllMapped(new RegExp(r'(\d+)?([\n|\r]+)(\d+):(\d+)'),(Match m){
                     return m[1] == null ? '${ m[2] +(++id).toString() +'\n'+m[3]+':'+m[4]}' :'${m[0]}';
                 })
                 .replaceAll(new RegExp('WEBVTT[\n|\r]+'), '');
+                
+                
         save (filePath, ss);
 }
 
