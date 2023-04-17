@@ -17,22 +17,20 @@ The srt files is generated in the original directory.
 
 
 
-# Update 更新
+# Update
 
-支持 [FrontendMasters/fm-transcripts](https://github.com/FrontendMasters/fm-transcripts/) 下 `.web_vtt` 文件的内容编码错误修复，如：
+support [FrontendMasters/fm-transcripts](https://github.com/FrontendMasters/fm-transcripts/)  `.web_vtt` files bug fixed，ie：
 ```
 &gt;&gt; // ==>  >>
 ```
-的重命名及转化！
-
-
-
 
 # TODO
-ASS
+- [] ASS
 
 
-# Refs
+# Reference
 [smplayer's convert](https://chromecast.smplayer.info/convert-srt-to-vtt/)
+
 https://github.com/asticode/go-astisub
+
 https://github.com/jamiees2/ass-to-vtt
