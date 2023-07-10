@@ -2,4 +2,7 @@ name: vtt2srt
 descript: 应用介绍
 
 dependencies:
-    args: ^1.5.1
+    args: ^2.4.2
+
+environment:
+    sdk: '^3.0.0'

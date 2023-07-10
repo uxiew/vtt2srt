@@ -10,21 +10,16 @@ import 'package:args/args.dart';
    // 让用户命令行输入路径|可能出错~
    // 命令行：目录输入使用双引号！！！！
 **/
-ArgResults argResults;
-
 
 var matchedReg = new RegExp(r'\.(web_vtt|vtt)$');
 
 void main(List<String> arguments){
-   
-       final ArgParser argParser = new ArgParser()
-       ..addOption('dir', abbr: 'D', defaultsTo: '.');
+  final ArgParser argParser = new ArgParser()
+  ..addOption('dir', abbr: 'D', defaultsTo: '.');
 
-      argResults = argParser.parse(arguments);
-      final String dir = argResults['dir'];
-
-  //String dir = r'C:\Users\ChandlerVer5\Desktop\Projectox!\xxx.vtt';
-   walktree (dir, vttToSrt);
+  ArgResults argResults = argParser.parse(arguments);
+  final String dir = argResults['dir'];
+  walktree (dir, vttToSrt);
 }
 
 
@@ -35,7 +30,7 @@ void main(List<String> arguments){
 	.replaceAll("&gt;&gt;",">>");
 
 	// print(data);
-   
+
    // 跳转到实际规则操作函数
    toSrtRule(filePath, data);
 }
@@ -56,7 +51,7 @@ Future walktree(String mainPath, callback) async{
                         }
                     });
                    }
-                    
+
                 });
                 break;
             case "file":
@@ -68,7 +63,7 @@ Future walktree(String mainPath, callback) async{
         }
     }
     catch (e){
-    
+
     }
 }
 
@@ -87,34 +82,30 @@ vttToSrt(String filePath) {
 }
 
 
-/// 转换规则 [rules]
+/// Rules of transformation [rules]
+toSrtRule(String filePath, String data) {
+  int id = 0;
+  var ss = data
+      .replaceAllMapped(
+        RegExp(r'(\d+):(\d+)\.(\d+)\s*--?>\s*(\d+):(\d+)\.(\d+)'),
+        (match) => '00:${match[1]}:${match[2]},${match[3]} --> 00:${match[4]}:${match[5]},${match[6]}',
+      )
+      .replaceAllMapped(
+        RegExp(r'(\d+):(\d+):(\d+)(?:\.(\d+))?\s*--?>\s*(\d+):(\d+):(\d+)(?:\.(\d+))?'),
+        (match) =>
+            '${match[1]}:${match[2]}:${match[3]},${match[4]} --> ${match[5]}:${match[6]}:${match[7]},${match[8]}',
+      )
+      .replaceAllMapped(
+        RegExp(r'(\d+)?([\n|\r]+)(\d+):(\d+)'),
+        (match) => match[1] == null ? '${match[2]}${++id}\n${match[3]}:${match[4]}' : '${match[0]}',
+      )
+      .replaceAll(RegExp('WEBVTT[\n|\r]+'), '');
 
-String toSrtRule(filePath, data){
-        int id = 0;
-        var ss = data.replaceAllMapped(
-                    new RegExp(r'(\d+):(\d+)\.(\d+)\s*--?>\s*(\d+):(\d+)\.(\d+)'), (Match m) => '${'00:'+m[1]+':'+m[2]+','+m[3]+' --> ' + '00:'+m[4]+':'+m[5]+','+m[6]}'
-                )
-                .replaceAllMapped(
-                    new RegExp(r'(\d+):(\d+):(\d+)(?:.(\d+))?\s*--?>\s*(\d+):(\d+):(\d+)(?:.(\d+))?', caseSensitive: false),
-                (Match m) => m[1]+":"+m[2]+":"+m[3]+","+m[4]+" --> "
-                            +m[5]+":"+m[6]+":"+m[7]+","+m[8]
-                            )
-                 //srt 标准时间前一行需要id数字，所以根据判断，vtt文件没有的话就加上~
-                .replaceAllMapped(new RegExp(r'(\d+)?([\n|\r]+)(\d+):(\d+)'),(Match m){
-                    return m[1] == null ? '${ m[2] +(++id).toString() +'\n'+m[3]+':'+m[4]}' :'${m[0]}';
-                })
-                .replaceAll(new RegExp('WEBVTT[\n|\r]+'), '');
-                
-                
-        save (filePath, ss);
+  save(filePath, ss);
 }
+
 
 //
 toVttRule(){
 
 }
-
-       
-
-
-	
